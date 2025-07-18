@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>楽曲推薦プロトタイプ</title>
+    <style>
+        body { font-family: sans-serif; margin: 0; padding: 20px; }
+        #controls button { padding: 10px 20px; font-size: 16px; margin-right: 10px; }
+        #recognition-result { margin-top: 20px; padding: 10px; border: 1px solid #ccc; min-height: 50px; }
+        #recommendations { margin-top: 30px; }
+        .song-item { border: 1px solid #eee; padding: 10px; margin-bottom: 10px; }
+        .song-item h3 { margin-top: 0; }
+
+        header {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            margin: 0;
+            padding: 0;
+            line-height: 1.2;
+        }
+        header h1 a {
+            text-decoration: none;
+            color: #000;
+        }
+        header nav a {
+            text-decoration: none;
+            color: #333;
+            margin-left: 15px;
+        }
+        header nav a:hover {
+            color: #d6336c; /* ピンク系 */
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="/">MusicReco</a></h1>
+        <nav>
+            <a href="/about">About</a>
+        </nav>
+    </header>
+
+    <div id="controls">
+        <button id="startButton">録音開始</button>
+        <button id="stopButton" disabled>録音停止</button>
+    </div>
+
+    <h2>あなたの会話:</h2>
+    <div id="recognition-result"></div>
+
+    <hr>
+
+    <h2>おすすめの楽曲:</h2>
+    <div id="recommendations">
+        <p>ここに楽曲が推薦されます。</p>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

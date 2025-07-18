@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>About - 楽曲推薦プロトタイプ</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        header {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a {
+            text-decoration: none;
+            color: #333;
+            margin-left: 15px;
+        }
+        nav a:hover {
+            color: #d6336c; /* ピンク系 */
+        }
+        header h1 {
+    margin: 0;
+    padding: 0;
+    line-height: 1.2; /* 高さ調整 */
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="/">MusicReco</a></h1>
+        <nav>
+           
+            <a href="/about">About</a>
+          </nav>
+    </header>
+
+    <section>
+        <h2>このサイトについて</h2>
+        <p>このプロトタイプは、会話から感情やジャンルを解析し、それに合った楽曲を推薦するシステムのデモです。</p>
+        <p>音声認識を使って会話を読み取り、GoogleのGeminiモデルを活用しておすすめ曲を提案します。</p>
+    </section>
+</body>
+</html>
