@@ -32,47 +32,52 @@ def recommend_music():
         return jsonify({'error': 'No text provided'}), 400
 
     try:
-        # Step 1: Geminiで感情・ジャンル・雰囲気を抽出
-        prompt_for_extraction = f"""
-        以下のユーザーの会話から、ユーザーの感情、求めているジャンル、そして歌詞の雰囲気を抽出してください。
-        もしジャンルや歌詞の雰囲気が明確でない場合は、「不明」と記述してください。
-        出力はJSON形式でお願いします。
-        例: {{"emotion": "リラックス", "genre": "ジャズ", "lyric_vibe": "心が落ち着く"}}
+        prompt_combined = f"""
+以下のユーザーの発言から、感情・ジャンル・歌詞の雰囲気を推測し、
+それに基づいて楽曲を3つ提案してください。
 
-        会話: "{user_text}"
-        """
-        response_extraction = model.generate_content(prompt_for_extraction)
-        extracted_info_str = response_extraction.text.strip().replace('```json\n', '').replace('\n```', '')
-        extracted_info = json.loads(extracted_info_str)
+出力は以下の形式のJSONでお願いします：
 
-        emotion = extracted_info.get("emotion", "不明")
-        genre = extracted_info.get("genre", "不明")
-        lyric_vibe = extracted_info.get("lyric_vibe", "不明")
+{{
+  "emotion": "...",
+  "genre": "...",
+  "lyric_vibe": "...",
+  "recommendations": [
+    {{
+      "title": "曲名A",
+      "artist": "アーティストX",
+      "reason": "理由A"
+    }},
+    {{
+      "title": "曲名B",
+      "artist": "アーティストY",
+      "reason": "理由B"
+    }},
+    {{
+      "title": "曲名C",
+      "artist": "アーティストZ",
+      "reason": "理由C"
+    }}
+  ]
+}}
 
-        # Step 2: 楽曲を提案
-        prompt_for_recommendation = f"""
-        ユーザーは「{user_text}」と話しました。
-        会話から、感情は「{emotion}」、求めているジャンルは「{genre}」、歌詞の雰囲気は「{lyric_vibe}」と推測されます。
+ユーザーの発言: "{user_text}"
+"""
 
-        これらの情報に基づいて、歌詞の内容がユーザーの気分や状況に合いそうな楽曲を3曲提案してください。
-        各曲について「title」「artist」「reason」の3項目で出力してください。
-        出力はJSON形式でお願いします。
-        例: [
-            {{"title": "曲名A", "artist": "アーティストX", "reason": "理由A"}},
-            {{"title": "曲名B", "artist": "アーティストY", "reason": "理由B"}},
-            {{"title": "曲名C", "artist": "アーティストZ", "reason": "理由C"}}
-        ]
-        """
-        response_recommendation = model.generate_content(prompt_for_recommendation)
-        recommended_songs_str = response_recommendation.text.strip().replace('```json\n', '').replace('\n```', '')
-        recommended_songs = json.loads(recommended_songs_str)
+        response = model.generate_content(prompt_combined)
+        response_text = response.text.strip().replace('```json\n', '').replace('\n```', '')
+        result = json.loads(response_text)
+
+        emotion = result.get("emotion", "不明")
+        genre = result.get("genre", "不明")
+        lyric_vibe = result.get("lyric_vibe", "不明")
+        recommended_songs = result.get("recommendations", [])
 
         return jsonify({'recommendations': recommended_songs})
 
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({'error': 'Failed to process request', 'details': str(e)}), 500
-
 
 if __name__ == '__main__':
     app.run(debug=True)
