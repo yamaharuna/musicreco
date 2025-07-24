@@ -33,6 +33,8 @@ stopButton.addEventListener('click', () => {
     stopButton.disabled = true;
 });
 
+
+
 // 音声認識結果が得られた時
 recognition.addEventListener('result', (event) => {
     const last = event.results.length - 1;
@@ -51,13 +53,11 @@ recognition.addEventListener('error', (event) => {
 // バックエンドにテキストを送信し、楽曲推薦を受け取る関数
 async function sendTextToBackend(text) {
     try {
-        // 変更後（同じオリジンを使うならこちらが望ましい）
-const response = await fetch('/recommend', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ text: text }),
-  });
-          
+        const response = await fetch('/recommend', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: text }),
+        });
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -72,18 +72,23 @@ const response = await fetch('/recommend', {
     }
 }
 
-// 推薦された楽曲を表示する関数
 function displayRecommendations(songs) {
     recommendationsDiv.innerHTML = ''; // クリア
     if (songs && songs.length > 0) {
         songs.forEach(song => {
             const songItem = document.createElement('div');
             songItem.classList.add('song-item');
+
+            const trackId = song.spotify_link ? song.spotify_link.split('/track/')[1] : null;
+
             songItem.innerHTML = `
                 <h3>${song.title} - ${song.artist}</h3>
                 <p>理由: ${song.reason}</p>
-                <a href="${song.spotify_link}" target="_blank">Spotifyで聴く</a>
-               
+                ${trackId ? `
+                <iframe 
+                  src="https://open.spotify.com/embed/track/${trackId}" 
+                  width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>` 
+                  : '<p>Spotifyリンクなし</p>'}
             `;
             recommendationsDiv.appendChild(songItem);
         });
