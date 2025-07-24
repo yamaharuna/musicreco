@@ -6,7 +6,13 @@
     <title>楽曲推薦プロトタイプ</title>
     <style>
         body { font-family: sans-serif; margin: 0; padding: 20px; }
-        #controls button { padding: 10px 20px; font-size: 16px; margin-right: 10px; }
+        #controls button { padding: 10px 20px; font-size: 16px; margin-right: 10px;background-color: #efabc3; /* ボタンの背景色 */
+            color: white;  border-radius: 8px;           /* 文字色 */ }
+            #controls button:hover {
+  background-color: #f27fa3; /* 好きな色に変えてね */
+  color: white;               /* 文字色も変えたい場合 */
+  cursor: pointer;            /* カーソルを指マークに */
+}
         #recognition-result { margin-top: 20px; padding: 10px; border: 1px solid #ccc; min-height: 50px; }
         #recommendations { margin-top: 30px; }
         .song-item { border: 1px solid #eee; padding: 10px; margin-bottom: 10px; }
