@@ -82,6 +82,8 @@ function displayRecommendations(songs) {
             songItem.innerHTML = `
                 <h3>${song.title} - ${song.artist}</h3>
                 <p>理由: ${song.reason}</p>
+                <a href="${song.spotify_link}" target="_blank">Spotifyで聴く</a>
+               
             `;
             recommendationsDiv.appendChild(songItem);
         });
