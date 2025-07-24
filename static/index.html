@@ -38,11 +38,32 @@
             color: #d6336c; /* ピンク系 */
             text-decoration: underline;
         }
+        .material-symbols-outlined {
+            font-size: 50px;
+            vertical-align: middle;
+            color: #e42568; /* ピンク系 */
+        }
+        .header-left h1 {
+  margin: 0;
+  padding-left: 10px; /* アイコンとの間にスペースをつける */
+  font-size: 24px;
+}
+
+
+
+
     </style>
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=music_cast" />
+
 </head>
 <body>
     <header>
+        <div class="header-left">
+        <span class="material-symbols-outlined">
+            music_cast
+            </span>
         <h1><a href="/">MusicReco</a></h1>
+    </div>
         <nav>
             <a href="/about">About</a>
         </nav>
