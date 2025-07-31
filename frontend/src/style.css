@@ -1,0 +1,85 @@
+body { 
+    font-family: sans-serif; 
+    margin: 0; 
+    padding: 20px; 
+  }
+  
+  #controls button { 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    margin-right: 10px;
+    background-color: #efabc3; /* ボタンの背景色 */
+    color: white;  /* 文字色 */
+    border-radius: 8px;           
+  }
+  
+  #controls button:hover {
+    background-color: #f27fa3; /* 好きな色に変えてね */
+    color: white;               /* 文字色も変えたい場合 */
+    cursor: pointer;            /* カーソルを指マークに */
+  }
+  
+  #recognition-result { 
+    margin-top: 20px; 
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    min-height: 50px; 
+  }
+  
+  #recommendations { 
+    margin-top: 30px; 
+  }
+  
+  .song-item { 
+    border: 1px solid #eee; 
+    padding: 10px; 
+    margin-bottom: 10px; 
+  }
+  
+  .song-item h3 { 
+    margin-top: 0; 
+  }
+  
+  header {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  header h1 {
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
+  }
+  
+  header h1 a {
+    text-decoration: none;
+    color: #f7a2de;
+  }
+  
+  header nav a {
+    text-decoration: none;
+    color: #f7a2de;
+    margin-left: 15px;
+  }
+  
+  header nav a:hover {
+    color: #d6336c; /* ピンク系 */
+    text-decoration: underline;
+  }
+  
+  .material-symbols-outlined {
+    font-size: 50px;
+    vertical-align: middle;
+    color: #e42568; /* ピンク系 */
+  }
+  
+  .header-left h1 {
+    margin: 0;
+    padding-left: 10px; /* アイコンとの間にスペースをつける */
+    font-size: 24px;
+  }
+  

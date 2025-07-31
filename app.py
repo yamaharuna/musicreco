@@ -4,6 +4,10 @@ from flask import Flask, request, jsonify
 from dotenv import load_dotenv
 import google.generativeai as genai
 import requests
+from flask_cors import CORS
+app = Flask(__name__)
+# CORS設定（必要に応じて）
+CORS(app)
 
 # 環境変数読み込み
 load_dotenv()
@@ -64,26 +68,26 @@ def get_spotify_link(song_title, artist_name):
             return get_spotify_link(song_title, artist_name)
         raise Exception(f"Failed to search for song on Spotify: {response.status_code}")
 
-# Flask初期化
-app = Flask(__name__, static_folder='static')
+
+
+
+
+
+
 
 # Gemini初期化
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 model = genai.GenerativeModel('gemini-2.5-pro')
-
-@app.route('/')
-def index():
-    return app.send_static_file('index.html')
-
-@app.route('/about')
-def about():
-    return app.send_static_file('about.html')
 
 @app.route('/recommend', methods=['POST'])
 def recommend_music():
     user_text = request.json.get('text')
     if not user_text:
         return jsonify({'error': 'No text provided'}), 400
+
+    # 以下略（あなたのロジック）
+
+
 
     try:
         prompt_combined = f"""
@@ -144,6 +148,9 @@ def recommend_music():
         print(f"Error: {e}")
         return jsonify({'error': 'Failed to process request', 'details': str(e)}), 500
 
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='localhost', port=5500, debug=True)
+    #localhostに揃える
+    
+
+
